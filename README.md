@@ -1,7 +1,6 @@
 # pdf-splitter
-Requires:
+Prerequisite :
 1) pip3 install PyPDF2
-
 
 Requires:
 1) Merged PDF in chronological order
