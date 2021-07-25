@@ -9,7 +9,7 @@ from PyPDF2.utils import PdfReadError, PyPdfError
 # array to store the names and companies
 names = list()
 # array to filter out characters to remove
-unwanted_chars = ["/", "\t", ":", "!", ";", "*","\n", "\\", "?", "<", ">", "|"]
+unwanted_chars = ["/", "\t", ":", "!", ";", "*","\n", "\\", "?", "<", ">", "|", "."]
 
 #setting up of logs
 clogs = logging.getLogger(__name__)
@@ -70,7 +70,7 @@ outfile = PyPDF2.PdfFileWriter()
 # named as names[0] and directory name under the company as names[1]
 
 for page in range(infile.getNumPages()):
-    clogs.info("Generating page: " + str(page+1) + ", for " + names[page][0])
+    
     current = infile.getPage(page)
     outfile = PyPDF2.PdfFileWriter()
     outfile.addPage(current)
@@ -87,6 +87,7 @@ for page in range(infile.getNumPages()):
     # write to outfile
     with open(write_dir + file_name, "wb") as outstream:
         outfile.write(outstream)
+    clogs.info("Generating page: " + str(page+1) + ", for " + write_dir + names[page][0])
 
 file.close()
 clogs.info("Succesfully generated " + str(len(names)) + " certificates!")
